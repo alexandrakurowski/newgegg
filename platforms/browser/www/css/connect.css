@@ -151,7 +151,7 @@
     display: -ms-flexbox; */
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     padding: 15px;
     background-repeat: no-repeat;
@@ -179,11 +179,12 @@
   }
   
   .wrap-login100 {
-    width: 390px;
+    width: 400px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
     float: right;
+   
   
     box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
@@ -198,7 +199,7 @@
   
   .login100-form {
     width: 100%;
-    float: right;
+    
   }
   
   .login100-form-title {
