@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+
+        <title>MyGegg</title>
+    </head>
+    <body>
+
+    
+        <!-- form login -->
+        <form class="text-center border border-light p-5">
+
+            <p class="h4 mb-4">Sign in</p>
+
+            <!-- Email -->
+            <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+
+            <!-- Password -->
+            <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+
+            <div class="d-flex justify-content-around">
+                <div>
+                    <!-- Remember me -->
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                        <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                    </div>
+                </div>
+                <div>
+                    <!-- Forgot password -->
+                    <a href="">Forgot password?</a>
+                </div>
+            </div>
+
+            <!-- Sign in button -->
+            <button class="btn btn-info btn-block my-4"  href="index.html">Sign in</a></button>
+
+            <!-- Register -->
+            <p>Not a member?
+                <a href="">Register</a>
+            </p>
+
+            <!-- Social login -->
+            <!-- <p>or sign in with:</p>
+
+            <a type="button" class="light-blue-text mx-2">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a type="button" class="light-blue-text mx-2">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a type="button" class="light-blue-text mx-2">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a type="button" class="light-blue-text mx-2">
+                <i class="fab fa-github"></i>
+            </a> -->
+
+        </form>
+        <!--  form login -->
+
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>
