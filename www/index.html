@@ -18,8 +18,9 @@
     under the License.
 -->
 <html>
-    <head>
-        <!--
+
+<head>
+  <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
             https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
         Some notes:
@@ -28,125 +29,101 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
-        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>MyGegg</title>
-    </head>
-    <body>
-        
-            <h1>Bienvenue sur MyGegg</h1>
-            <!-- <div id="deviceready" class="blink">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="nodes_modules/mdbootstrap/css/mdb.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <title>MyGegg</title>
+</head>
+
+<body>
+
+  <!-- <h1>Bienvenue sur MyGegg</h1> -->
+  <!-- <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div> -->
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
 
-            <!-- SideNav slide-out button -->
-<a href="#" data-activates="slide-out" class="btn btn-primary p-3 button-collapse"><i class="fas fa-bars"></i></a>
-
-<!-- Sidebar navigation -->
-<div id="slide-out" class="side-nav fixed">
-  <ul class="custom-scrollbar">
-    <!-- Logo -->
-    <li>
-      <div class="logo-wrapper waves-light">
-        <a href="#"><img src="" class="img-fluid flex-center"></a>
+      <div id="dismiss">
+        <i class="fas fa-arrow-left"></i>
       </div>
-    </li>
-    <!--/. Logo -->
-    <!--Social-->
-    <li>
-      <ul class="social">
-        <li><a href="#" class="icons-sm fb-ic"><i class="fab fa-facebook-f"> </i></a></li>
-        <li><a href="#" class="icons-sm pin-ic"><i class="fab fa-pinterest"> </i></a></li>
-        <li><a href="#" class="icons-sm gplus-ic"><i class="fab fa-google-plus-g"> </i></a></li>
-        <li><a href="#" class="icons-sm tw-ic"><i class="fab fa-twitter"> </i></a></li>
-      </ul>
-    </li>
-    <!--/Social-->
-    <!--Search Form-->
-    <li>
-      <form class="search-form" role="search">
-        <div class="form-group md-form mt-0 pt-1 waves-light">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-      </form>
-    </li>
-    <!--/.Search Form-->
-    <!-- Side navigation links -->
-    <li>
-      <ul class="collapsible collapsible-accordion">
-        <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i> Submit blog<i
-              class="fas fa-angle-down rotate-icon"></i></a>
-          <div class="collapsible-body">
-            <ul>
-              <li><a href="#" class="waves-effect">Submit listing</a>
-              </li>
-              <li><a href="#" class="waves-effect">Registration form</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li><a class="collapsible-header waves-effect arrow-r"><i class="far fa-hand-pointer"></i>
-            Instruction<i class="fas fa-angle-down rotate-icon"></i></a>
-          <div class="collapsible-body">
-            <ul>
-              <li><a href="#" class="waves-effect">For bloggers</a>
-              </li>
-              <li><a href="#" class="waves-effect">For authors</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> About<i class="fas fa-angle-down rotate-icon"></i></a>
-          <div class="collapsible-body">
-            <ul>
-              <li><a href="#" class="waves-effect">Introduction</a>
-              </li>
-              <li><a href="#" class="waves-effect">Monthly meetings</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li><a class="collapsible-header waves-effect arrow-r"><i class="far fa-envelope"></i> Contact me<i
-              class="fas fa-angle-down rotate-icon"></i></a>
-          <div class="collapsible-body">
-            <ul>
-              <li><a href="#" class="waves-effect">FAQ</a>
-              </li>
-              <li><a href="#" class="waves-effect">Write a message</a>
-              </li>
-              <li><a href="#" class="waves-effect">FAQ</a>
-              </li>
-              <li><a href="#" class="waves-effect">Write a message</a>
-              </li>
-              <li><a href="#" class="waves-effect">FAQ</a>
-              </li>
-              <li><a href="#" class="waves-effect">Write a message</a>
-              </li>
-              <li><a href="#" class="waves-effect">FAQ</a>
-              </li>
-              <li><a href="#" class="waves-effect">Write a message</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </li>
-    <!--/. Side navigation links -->
-  </ul>
-  <div class="sidenav-bg rgba-blue-strong"></div>
-</div>
-<!--/. Sidebar navigation -->
-        
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    </body>
+      <div class="sidebar-header">
+        <h3>Bootstrap Sidebar</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <p>Dummy Heading</p>
+        <li class="active">
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+          <ul class="collapse list-unstyled" id="homeSubmenu">
+            <li>
+              <a href="#">Home 1</a>
+            </li>
+            <li>
+              <a href="#">Home 2</a>
+            </li>
+            <li>
+              <a href="#">Home 3</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">About</a>
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+          <ul class="collapse list-unstyled" id="pageSubmenu">
+            <li>
+              <a href="#">Page 1</a>
+            </li>
+            <li>
+              <a href="#">Page 2</a>
+            </li>
+            <li>
+              <a href="#">Page 3</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Portfolio</a>
+        </li>
+        <li>
+          <a href="#">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <!-- Dark Overlay element -->
+    <div class="overlay"></div>
+  </div>
+
+
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- <script type="text/javascript" src="node_modules/mdbootstrap/js/mdb.min.js"></script> -->
+
+</body>
+
 </html>
