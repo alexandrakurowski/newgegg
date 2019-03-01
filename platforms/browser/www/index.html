@@ -29,10 +29,8 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-tap-highlight" content="no">-->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="nodes_modules/mdbootstrap/css/mdb.min.css"> -->
@@ -41,80 +39,34 @@
 </head>
 
 <body>
-
-  <!-- <h1>Bienvenue sur MyGegg</h1> -->
-  <!-- <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div> -->
-  <div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar">
-
-      <div id="dismiss">
-        <i class="fas fa-arrow-left"></i>
-      </div>
-
-      <div class="sidebar-header">
-        <h3>Bootstrap Sidebar</h3>
-      </div>
-
-      <ul class="list-unstyled components">
-        <p>Dummy Heading</p>
-        <li class="active">
-          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-          <ul class="collapse list-unstyled" id="homeSubmenu">
-            <li>
-              <a href="#">Home 1</a>
-            </li>
-            <li>
-              <a href="#">Home 2</a>
-            </li>
-            <li>
-              <a href="#">Home 3</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">About</a>
-          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-          <ul class="collapse list-unstyled" id="pageSubmenu">
-            <li>
-              <a href="#">Page 1</a>
-            </li>
-            <li>
-              <a href="#">Page 2</a>
-            </li>
-            <li>
-              <a href="#">Page 3</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">Portfolio</a>
-        </li>
-        <li>
-          <a href="#">Contact</a>
-        </li>
-      </ul>
-    </nav>
-
-    <!-- Page Content -->
-    <div id="content">
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-
-          <button type="button" id="sidebarCollapse" class="btn btn-info">
-            <i class="fas fa-align-left"></i>
-            <span>Toggle Sidebar</span>
-          </button>
-        </div>
-      </nav>
-    </div>
-    <!-- Dark Overlay element -->
-    <div class="overlay"></div>
+  <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+    <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+    <a href="#" class="w3-bar-item w3-button">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button">Link 3</a>
   </div>
+
+  <div id="main">
+
+    <div class="w3-teal">
+      <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+      <div class="w3-container">
+        <h1>My Page</h1>
+      </div>
+    </div>
+
+    <img src="img_car.jpg" alt="Car" style="width:100%">
+
+    <div class="w3-container">
+      <p>In this example, the sidebar is hidden (style="display:none")</p>
+      <p>It is shown when you click on the menu icon in the top left corner.</p>
+      <p>When it is opened, it shifts the page content to the right.</p>
+      <p>We use JavaScript to add a 25% left margin to the div element with id="main" when this happens. The value
+        "25%" matches the width of the sidebar.</p>
+    </div>
+
+  </div>
+
 
 
   <script type="text/javascript" src="cordova.js"></script>
