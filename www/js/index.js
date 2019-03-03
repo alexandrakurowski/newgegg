@@ -64,11 +64,11 @@ function w3_close() {
 /* Map with MAPBOX ************************************************
 */
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoia2FjcmVhdGlvbiIsImEiOiJjanJrczE4cDIwMHhzNDVtcDhzdTRraGRvIn0.5fEOyjYgkK_BrlPPp2xJXg';
+mapboxgl.accessToken = 'pk.eyJ1Ijoia2FjcmVhdGlvbiIsImEiOiJjanN0Zm5tYmgxd3N0NDlvNHd5b2JzY3dnIn0.PWhJG8uoe3_okpyIBmvzVA';
 var map = new mapboxgl.Map({
-    container: 'map', // container id
-    style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location
-    center: [43, 64638, 0, 586709], // starting position [lng, lat]
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [0.5850507, 43.6463558], // starting position [lng, lat]
     zoom: 9 // starting zoom
 });
 

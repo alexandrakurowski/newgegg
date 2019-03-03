@@ -2,9 +2,12 @@
  * *************STYLE FOR MAP***********************
  * 
 */
-#map {
+/* #map {  
+    position:absolute; 
+    top:0; 
+    bottom:0; 
     width:100%;
-}
+ } */
     /* // MAP POP-UP STYLE */
 
 .mapboxgl - popup{
