@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <!-- <meta http-equiv="Content-Security-Policy-Report-Only" content="script-src 'self'; object-src 'none'"/> -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <!-- <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">-->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="node_modules/select2/dist/css/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/connect.css">
+
+    <title>MyGegg</title>
+</head>
+
+<body>
+    <div class="container-login100" style="background-image: url('images/bg-01.png');">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+            <form class="login100-form validate-form">
+                <span class="login100-form-title p-b-37">
+                    Bienvenue sur MyGegg | Enregistrez-vous pour accéder à l'application
+                </span>
+                <!-- rajouter bouton check je suis salarié, je suis partenaire -->
+                <div class="wrap-input100 validate-input m-b-20" data-validate="Nom">
+                    <input class="input100" type="text" name="name" placeholder="Nom">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-20" data-validate="Prénom">
+                    <input class="input100" type="text" name="name" placeholder="Prénom">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-20" data-validate="Votre adresse E-Mail">
+                    <input class="input100" type="text" name="name" placeholder="Votre adresse E-Mail">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-20" data-validate="Saisissez un mot de passe">
+                    <input class="input100" type="text" name="name" placeholder="saisissez mot de passe">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-25" data-validate="Confirmez mot de passe">
+                    <input class="input100" type="password" name="pass" placeholder="Confirmez votre mot de passe">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <!-- <button class="login100-form-btn"--><a href="index.html">
+                        Je m'enregistre </a>
+                    <!-- </button> -->
+                </div>
+
+                <div class="text-center">
+                    <a href="#" class="txt2 hov1">
+                        Conditions Générales d'Utilisation
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="node_modules/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="node_modules/popper.js/dist/js/popper.min.js"></script>
+    <script type="text/javascript" src="js/connect.js"></script>
+</body>
+
+</html>

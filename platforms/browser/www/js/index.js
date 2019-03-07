@@ -175,3 +175,29 @@ map.on('mouseenter', 'places', function () {
 map.on('mouseleave', 'places', function () {
     map.getCanvas().style.cursor = '';
 });
+
+
+/**************************************************
+ * 
+ * 
+ * call function to init db and get datas for front
+ *
+ * *******************************************************/
+
+document.addEventListener('deviceready', start, false);
+
+var categories;
+
+function start() {
+    db.transaction(fillDB, errorCB, successCB);
+
+}
+
+function searchAllCategories(tx) {
+    tx.executeSql('SELECT * FROM categories ORDER BY category_name ASC;', [], function (tx, result) {
+        categories = result.rows;
+        console.log(categories)
+        return categories;
+    });
+}
+
