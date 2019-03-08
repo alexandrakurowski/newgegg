@@ -1,12 +1,96 @@
+/* body{
+    
+    background-size: auto;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+
+} */
+
+/********************************************************************
+*
+* NAVBAR / CSS
+*
+**************************************************************************/
+#navbar{
+    margin: 0 !important;
+    width: 100%;
+    justify-content: space-between;
+    background-color: #054471;
+    }
+
+#fond{
+    background-color: #054471;
+}
+/* espacement entre les boutons */
+
+li {
+margin : 10px 0;
+}
+
+#dropdownMenu2{
+background-color: #004466;
+border-radius: 4px;
+color: rgb(255, 255, 255);
+text-decoration-color: rgb(255, 255, 255);
+width: 120px;
+text-align: center;
+}
+
+#admin{
+height: 40px;
+width: 125px;
+background-color: #b0d50c;
+text-decoration-color: rgb(255, 255, 255);
+border: #b0d50c;
+border-radius: 5px;
+/* margin: 2px; */
+}
+#selectCat{
+color:rgb(255, 255, 255) ;
+height: 40px;
+width: 125px;
+background-color: #005e8d;
+text-decoration-color: rgb(255, 255, 255);
+border: #005e8d;
+border-radius: .25rem;
+text-align: center;
+padding: 5px;
+}
+#admin:hover{
+background-color: rgb(117, 166, 49);
+}
+#selectCat:hover{
+background-color: #004466;
+}
+
+#search{
+position: absolute;
+top: 0px;
+right: 0px;
+float: left;
+
+}
+#inputSearch{
+border-radius : 15px;
+}
+.navbar-toggler{
+border-radius: .25rem;
+}
 /******************** ***************************************
  * *************STYLE FOR MAP***********************
  * 
 */
+/* #map-container {
+    height: 90%;
+    width: 100%;
+} */
+
 /* #map {  
     position:absolute; 
-    top:0; 
-    bottom:0; 
-    width:100 %;
+    margin: auto; 
+    width:100%;
+    height: 90%;
  } */
 
  /****************** MARKERS STYLE ************************/
@@ -27,3 +111,65 @@
     font: 12px / 20px 'Helvetica Neue', Arial, Helvetica, sans - serif;
 }
 
+/* Orange GEGG
+
+R   250
+V  131
+B   5
+
+C   0
+M  58
+J    95
+N   0
+
+#FA8305 */
+/* Jaune GEGG
+
+R   253
+V  178
+B   3
+
+C   0
+M  35
+J    93
+N   0
+
+#fdb203 */
+/* Bleu GEGG
+
+R   5
+V   68
+B   113
+
+C   100
+M   73
+J    30
+N   16
+
+#054471 */
+
+/* Beige GEGG
+
+R   244
+V   241
+B   226
+
+C   6
+M  4
+J    14
+N   0
+
+#F4F1E2 */
+
+/* Gris GEGG
+
+R   140
+V   140
+B   140
+
+C   46
+M  36
+J    36
+N   16
+
+#8C8C8C */

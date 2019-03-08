@@ -33,12 +33,13 @@ function successCB() {
 
 //remplie la table categories avec les données du json
 function fillCategories(tx) {
+    console.log("testfillCate");
     tx.executeSql("DROP TABLE IF EXISTS categories");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS categories (id_category unique, name_category, fk_markers)");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS categories (category_id unique, category_name, fk_markers)");
     for (var i = 0; i < allCategories.length; i++) {
         console.log("je boucle dans categories");
-        var sql = 'INSERT INTO categories (id_category, name_category,fk_markers) VALUES ('
-            + allCategories[i].id_category + ', "' + allCategories[i].name_category + '", "' + allCategories[i].fk_markers + '")';
+        var sql = 'INSERT INTO categories (category_id, category_name,fk_markers) VALUES ('
+            + allCategories[i].category_id + ', "' + allCategories[i].category_name + '", "' + allCategories[i].fk_markers + '")';
         tx.executeSql(sql);
     }
-
+}
