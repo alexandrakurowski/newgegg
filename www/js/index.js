@@ -177,6 +177,7 @@ map.on('mouseleave', 'places', function () {
 document.addEventListener('deviceready', start, false);
 
 var categories;
+var partners;
 
 function start() {
     db.transaction(fillDB, errorCB, successCB);
@@ -186,8 +187,14 @@ function start() {
 function searchAllCategories(tx) {
     tx.executeSql('SELECT * FROM categories ORDER BY category_name ASC;', [], function (tx, result) {
         categories = result.rows;
-        console.log(categories)
+        console.log(categories);
         return categories;
     });
 }
-
+function searchAllPartners(tx) {
+    tx.executeSql('SELECT * FROM partners ORDER BY id ASC;', [], function (tx, result) {
+        partners = result.rows;
+        console.log(partners);
+        return partners;
+    });
+}

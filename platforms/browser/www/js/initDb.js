@@ -52,14 +52,15 @@ function fillCategories(tx) {
         tx.executeSql(sql);
     }
 }
-function fillPartners(tx) {
-    console.log("testfillCate");
-    tx.executeSql("DROP TABLE IF EXISTS partners");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS partners (partner_id unique, name_ets, tel_ets, mail_ets, site_ets, contact_name, description_ets, image_ets, fk_adress, fk_offer)");
-    for (var i = 0; i < allPartners.length; i++) {
-        console.log("je boucle dans partners");
-        var sql = 'INSERT INTO partners (partner_id unique, name_ets, tel_ets, mail_ets, site_ets, contact_name, description_ets, image_ets, fk_adress, fk_offer) VALUES ('
-            + allCategories[i].category_id + ', "' + allCategories[i].category_name + '", "' + allCategories[i].fk_markers + '")';
-        tx.executeSql(sql);
-    }
-}
+// function fillPartners(tx) {
+//     console.log("testfillPartners");
+//     tx.executeSql("DROP TABLE IF EXISTS partners");
+//     tx.executeSql("CREATE TABLE IF NOT EXISTS partners (partner_id unique, name_ets, tel_ets, mail_ets, site_ets, contact_name, description_ets, image_ets, fk_adress, fk_offer)");
+//     for (var i = 0; i < allPartners.length; i++) {
+//         console.log("je boucle dans partners");
+//         var sql = 'INSERT INTO partners (partner_id unique, name_ets, tel_ets, mail_ets, site_ets, contact_name, description_ets, image_ets, fk_adress, fk_offer) VALUES ('
+//             + allPartners[i].id + ', "' + allPartners[i].nomEntreprise + '", "' + allPartners[i].typeActivite + '", "' + allPartners[i].descriptionEntreprise + '", "' + allPartners[i].nomContact + "')';
+
+//         tx.executeSql(sql);
+//     }
+// }
