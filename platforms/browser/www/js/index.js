@@ -191,10 +191,10 @@ function searchAllCategories(tx) {
         return categories;
     });
 }
-// function searchAllPartners(tx) {
-//     tx.executeSql('SELECT * FROM partners ORDER BY id ASC;'), [], function (tx, result) {
-//         partners = result.rows;
-//         console.log(partners);
-//         return partners;
-//     });
-// }
+function searchAllPartners(tx) {
+    tx.executeSql('SELECT * FROM partners ORDER BY id ASC;', [], function (tx, result) {
+        partners = result.rows;
+        console.log(partners);
+        return partners;
+    });
+}
