@@ -59,11 +59,11 @@ function successCB() {
 function fillCategories(tx) {
     console.log("testfillCate");
     tx.executeSql("DROP TABLE IF EXISTS categories");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS categories (category_id unique, category_name, fk_markers)");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS categories (category_id unique, category_name, img_url)");
     for (var i = 0; i < allCategories.length; i++) {
         console.log("loop into categories");
-        var sql = 'INSERT INTO categories (category_id, category_name,fk_markers) VALUES ('
-            + allCategories[i].category_id + ', "' + allCategories[i].category_name + '", "' + allCategories[i].fk_markers + '")';
+        var sql = 'INSERT INTO categories (category_id, category_name,img_url) VALUES ('
+            + allCategories[i].category_id + ', "' + allCategories[i].category_name + '", "' + allCategories[i].img_url + '")';
         tx.executeSql(sql);
     }
 }

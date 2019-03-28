@@ -40,6 +40,8 @@ function fillDB(tx) {
         console.log(data2),
             allEmployee = data2;
         db.transaction(fillEmployee, errorCB, successCB);
+        // CAREFUL NEED TO FIND SOLUTION TO FILL USER WITH AJX REQUEST FROM PARTNERS AND EMPLOYEE IN NEXT VERSION OF MY GEGG
+        db.transaction(fillUsers, errorCB, successCB);
     });
 }
 // funtion error or success for fill db
@@ -57,11 +59,11 @@ function successCB() {
 function fillCategories(tx) {
     console.log("testfillCate");
     tx.executeSql("DROP TABLE IF EXISTS categories");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS categories (category_id unique, category_name, fk_markers)");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS categories (category_id unique, category_name, img_url)");
     for (var i = 0; i < allCategories.length; i++) {
         console.log("loop into categories");
-        var sql = 'INSERT INTO categories (category_id, category_name,fk_markers) VALUES ('
-            + allCategories[i].category_id + ', "' + allCategories[i].category_name + '", "' + allCategories[i].fk_markers + '")';
+        var sql = 'INSERT INTO categories (category_id, category_name,img_url) VALUES ('
+            + allCategories[i].category_id + ', "' + allCategories[i].category_name + '", "' + allCategories[i].img_url + '")';
         tx.executeSql(sql);
     }
 }
@@ -117,5 +119,15 @@ function fillEmployee(tx) {
         tx.executeSql(sql);
     }
 }
-
+// A REPRENDRE AVEC LA FONCTION S'INSCRIRE QUI VA REMPLIR LES CHAMPS
+//
+// function fillUsers(tx) {
+//     console.log(" test function fill user");
+//     tx.executeSql("DROP TABLE IF EXISTS users");
+//     tx.executeSql("CREATE TABLE IF NOT EXISTS users(user_pwd, user_mail, fk_employee)");  // BEWARE no fk_partners init in V1
+//     for (var i = 0; i < allEmployee.length; i++){
+//         console.log("loop into employee ");
+//         var sql = 'INSERT INTO users (user_pwd, user_mail)'
+//     }
+// }
 

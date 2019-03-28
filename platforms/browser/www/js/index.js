@@ -1,8 +1,9 @@
 console.log("hellogegg");
+/* function to init app */
 
 // var app = {
 //     // Application Constructor
-//     initialize: function() {
+//     initialize: function () {
 //         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
 //     },
 
@@ -10,46 +11,27 @@ console.log("hellogegg");
 //     //
 //     // Bind any cordova events here. Common events are:
 //     // 'pause', 'resume', etc.
-//     onDeviceReady: function() {
+//     onDeviceReady: function () {
 //         this.receivedEvent('deviceready');
+
 //     },
 
-//     // Update DOM on a Received Event
-//     receivedEvent: function(id) {
-//         var parentElement = document.getElementById(id);
-//         var listeningElement = parentElement.querySelector('.listening');
-//         var receivedElement = parentElement.querySelector('.received');
+// Update DOM on a Received Event
+// receivedEvent: function (id) {
+//     var parentElement = document.getElementById(id);
+//     var listeningElement = parentElement.querySelector('.listening');
+//     var receivedElement = parentElement.querySelector('.received');
 
-//         listeningElement.setAttribute('style', 'display:none;');
-//         receivedElement.setAttribute('style', 'display:block;');
+//     listeningElement.setAttribute('style', 'display:none;');
+//     receivedElement.setAttribute('style', 'display:block;');
 
-//         console.log('Received Event: ' + id);
-//     }
+//     //     console.log('Received Event: ' + id);
+//     // }
 // };
 
 // app.initialize();
+/******************slidebar */
 
-
-
-/*****************************************************************************************************************************************************************************************************************************************************************
-|
-|    ALL THE FUNCTIONS TO GET AND INITIALIZE THE MAP with leaflet
- *******************************************************************************
- */
-
-// console.log("hello mymapleaflet");
-
-// //AUCH MAP INTIALIZING [lat, long, zoomsize]
-// var mymap = L.map('mapid').setView([0, 586709, 43, 64638], 13);
-
-// // ACCESS TOKEN MAPBOX AND NAME OF THE MAP
-
-// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-//     maxZoom: 18,
-//     id: 'mapbox.streets',
-//     accessToken: 'pk.eyJ1Ijoia2FjcmVhdGlvbiIsImEiOiJjanJrczE4cDIwMHhzNDVtcDhzdTRraGRvIn0.5fEOyjYgkK_BrlPPp2xJXg'
-// }).addTo(mymap);
 
 /* ******************** Map with MAPBOX ************************************************
 */
@@ -61,7 +43,7 @@ var map = new mapboxgl.Map({
     center: [0.5850507, 43.6463558], // starting position [lng, lat]
     zoom: 9 // starting zoom
 });
-
+/******************************************************** */
 /* add icon gegg in static mode */
 /* TEST ICON CAT MAPBOX OK
 // map.on('load', function () {
@@ -94,9 +76,30 @@ var map = new mapboxgl.Map({
 */
 /* TEST POP UP MAP BOX */
 
+///test add all images categories : 
+
+// const images =[
+//     {imageUrl: 'path/to/image_1.png', id: 'image_1'},
+//     {imageUrl: 'path/to/image_2.png', id: 'image_2'},
+//     ...
+//   ]
+
+//   images.forEach(img => {
+//       map.loadImage(img.url, function(error, res) {
+//         map.addImage(img.id, res)
+//       }
+//   })
+
+// For each image url {
+//     map.loadImage(url, function(error, image) {
+//       map.addImage('foo', image)
+//     }
+//   }
+// ***************************************************************
 map.on('load', function () {
     map.loadImage('images/autres.png', function (error, image) {
         if (error) throw error;
+
         map.addImage('autres', image);
         //Add a layer showing the places.
         map.addLayer({

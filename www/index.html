@@ -31,47 +31,27 @@
         -->
   <!-- <meta name="viewport" content="width=device-width, initial-scale=0"> -->
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" <link rel="stylesheet" type="text/css"
+    href="css/index.css">
+
+  <!-- Font Awesome JS -->
+  <script src="nodes_modules/@fortawesome/fontawesome/js/solid.js"></script>
+  <script src="nodes_modules/@fortawesome/fontawesome/js/fontawesome.js"></script>
   <script src="node_modules/leaflet/dist/leaflet.js"></script>
 
   <title>MyGegg</title>
 </head>
 
 <body>
-  <div>
-    <nav class="navbar navbar-expand-lg navbar-info bg-info" id="fond">
-      <!-- <a class="navbar-brand" href="#">logo Cantoloup</a> -->
-      <!-- BOUTON MENU hamburger -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <button id="admin" class="btn btn-secondary my-2 my-sm-0" type="submit">Admin</button><span class="sr-only">(current)</span></a>
-          </li>
-          <!-- BOUTON/MENU CATEGORIES -->
-          <li>
-            <select name="selectCat" id="selectCat" placeholder="Catégories">
-              <option selected="selected" value="Catégories...">Catégories...</option>
-            </select>
-          </li>
-        </ul>
-      </div>
-      <div id="search">
-        <form class="form-inline my-2 my-lg-0">
-          <input id="inputSearch" class="form-control mr-sm-2" type="search" placeholder="Recherche..." aria-label="Search">
-        </form>
-      </div>
-    </nav>
-  </div>
+
+
   <!-- ici vient la carte -->
 
   <div id='map' style='width: 100%; height: 600px; margin:auto;'>
@@ -79,6 +59,7 @@
   </div>
   <div class="marker">
 
+  </div>
   </div>
 
 
@@ -91,6 +72,7 @@
   <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/initDb.js"></script>
+  <script type="text/javscript" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

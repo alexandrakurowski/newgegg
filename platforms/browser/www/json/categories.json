@@ -1,37 +1,37 @@
 [
     {
         "category_id": "1",
-        "category_name": "Aliments & Gastrnomie",
-        "fk_markers": "1"
+        "category_name": "Gastronomie et Alimentation",
+        "img_url": "images/alimentation.png"
     },
     {
         "category_id": "2",
         "category_name": "Tourisme",
-        "fk_markers": "2"
+        "img_url": "images/tourisme.png"
     },
     {
         "category_id": "3",
         "category_name": "Sport & Loisirs",
-        "fk_markers": "3"
+        "img_url": "images/loisirs.png"
     },
     {
         "category_id": "4",
         "category_name": "Magasins Spécialisés",
-        "fk_markers": "4"
+        "img_url": "images/shop.png"
     },
     {
         "category_id": "5",
         "category_name": "Services",
-        "fk_markers": "5"
+        "img_url": "images/services.png"
     },
     {
         "category_id": "6",
         "category_name": "Bien-être & Santé",
-        "fk_markers": "6"
+        "img_url": "images/bienEtre.png"
     },
     {
         "category_id": "7",
         "category_name": "Autres",
-        "fk_markers": "7"
+        "img_url": "images/autres.png"
     }
 ]
