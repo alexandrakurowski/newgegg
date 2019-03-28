@@ -1,4 +1,6 @@
 console.log("hellogegg");
+
+
 /* function to init app */
 
 // var app = {
@@ -99,7 +101,7 @@ var map = new mapboxgl.Map({
 map.on('load', function () {
     map.loadImage('images/autres.png', function (error, image) {
         if (error) throw error;
-
+        console.log("map");
         map.addImage('autres', image);
         //Add a layer showing the places.
         map.addLayer({
@@ -134,7 +136,7 @@ map.on('load', function () {
             },
             "layout": {
                 "icon-image": "autres",
-                "icon-size": 0.25,
+                "icon-size": 0.05,
                 "icon-allow-overlap": true
             }
         });
