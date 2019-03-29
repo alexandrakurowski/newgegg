@@ -1,11 +1,11 @@
-/* body{
+body{
     
     background-size: auto;
     background-repeat: no-repeat;
     height: 100%;
     margin: 0;
 
-} */
+}
 
 /********************************************************************
 *
@@ -224,23 +224,25 @@ a.article, a.article:hover {
 
 }
 
+#mapid { height: 600px; }
+
  /****************** MARKERS STYLE ************************/
- .marker {
-    /* background-image: url('images/autres.png'); */
+ /* .marker {
+    /* background-image: url('images/autres.png'); 
     background-size: cover;
     width: 10px;
     height: 10px;
     border-radius: 50%;
     cursor: pointer;
   }
-  
+   */
 
     /* // MAP POP-UP STYLE */
 
-.mapboxgl - popup{
+/* .mapboxgl - popup{
     max - width: 400px;
     font: 12px / 20px 'Helvetica Neue', Arial, Helvetica, sans - serif;
-}
+} */
 
 /* Orange GEGG
 

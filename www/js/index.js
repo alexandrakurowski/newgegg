@@ -35,147 +35,133 @@ console.log("hellogegg");
 /******************slidebar */
 
 
-/* ******************** Map with MAPBOX ************************************************
-*/
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoia2FjcmVhdGlvbiIsImEiOiJjanN0Zm5tYmgxd3N0NDlvNHd5b2JzY3dnIn0.PWhJG8uoe3_okpyIBmvzVA';
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
-    center: [0.5850507, 43.6463558], // starting position [lng, lat]
-    zoom: 9 // starting zoom
-});
-/******************************************************** */
-/* add icon gegg in static mode */
-/* TEST ICON CAT MAPBOX OK
-// map.on('load', function () {
-//     map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', function (error, image) {
-//         if (error) throw error;
-//         map.addImage('cat', image);
-//         map.addLayer({
-//             "id": "points",
-//             "type": "symbol",
-//             "source": {
-//                 "type": "geojson",
-//                 "data": {
-//                     "type": "FeatureCollection",
-//                     "features": [{
-//                         "type": "Feature",
-//                         "geometry": {
-//                             "type": "Point",
-//                             "coordinates": [0.5826869, 43.6339184]
-//                         }
-//                     }]
-//                 }
-//             },
-//             "layout": {
-//                 "icon-image": "cat",
-//                 "icon-size": 0.25
-//             }
-//         });
-//     });
-// });
-*/
-/* TEST POP UP MAP BOX */
+/******************************************************************
+ * 
+ * 
+ * -------------------MAP with LEAFLET-------------------------------
+ * 
+ * 
+ **********************************************************************************/
 
-///test add all images categories : 
+var mymap = L.map('mapid').setView([43.6463558, 0.5850507], 9);
 
-// const images =[
-//     {imageUrl: 'path/to/image_1.png', id: 'image_1'},
-//     {imageUrl: 'path/to/image_2.png', id: 'image_2'},
-//     ...
-//   ]
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1Ijoia2FjcmVhdGlvbiIsImEiOiJjanN0Zm5tYmgxd3N0NDlvNHd5b2JzY3dnIn0.PWhJG8uoe3_okpyIBmvzVA'
+}).addTo(mymap);
 
-//   images.forEach(img => {
-//       map.loadImage(img.url, function(error, res) {
-//         map.addImage(img.id, res)
-//       }
-//   })
+// ************customize icon for markers of categories************** //
+//
+//**************************************************************** */
+// Marker gastro&alim
 
-// For each image url {
-//     map.loadImage(url, function(error, image) {
-//       map.addImage('foo', image)
-//     }
-//   }
-// ***************************************************************
-map.on('load', function () {
-    map.loadImage('images/autres.png', function (error, image) {
-        if (error) throw error;
-        console.log("map");
-        map.addImage('autres', image);
-        //Add a layer showing the places.
-        map.addLayer({
-            "id": "places",
-            "type": "symbol",
-            "source": {
-                "type": "geojson",
-                "data": {
-                    "type": "FeatureCollection",
-                    "features": [{
-                        "type": "Feature",
-                        "properties": {
-                            "description": "<strong>Make it Mount Pleasant</strong><p><a href=\"http://www.mtpleasantdc.com/makeitmtpleasant\" target=\"_blank\" title=\"Opens in a new window\">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>",
-                            "icon": "autres"
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [0.5826869, 43.6339184]
-                        }
-                    }, {
-                        "type": "Feature",
-                        "properties": {
-                            "description": "<strong>Mad Men Season Five Finale Watch Party</strong><p>Head to Lounge 201 (201 Massachusetts Avenue NE) Sunday for a <a href=\"http://madmens5finale.eventbrite.com/\" target=\"_blank\" title=\"Opens in a new window\">Mad Men Season Five Finale Watch Party</a>, complete with 60s costume contest, Mad Men trivia, and retro food and drink. 8:00-11:00 p.m. $10 general admission, $20 admission and two hour open bar.</p>",
-                            "icon": "bien_etre"
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [0.5907159999999294, 43.6486]
-                        }
-                    }]
-                }
-            },
-            "layout": {
-                "icon-image": "autres",
-                "icon-size": 0.05,
-                "icon-allow-overlap": true
-            }
-        });
-    });
-    // When a click event occurs on a feature in the places layer, open a popup at the
-    // location of the feature, with description HTML from its properties.
-    map.on('click', 'places', function (e) {
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.description;
+var gastro = L.icon({
+    iconUrl: 'www/images/alimentation.png',
+    iconSize: [38, 38], // size of the icon
 
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
 
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
-// Change the cursor to a pointer when the mouse is over the places layer.
-map.on('mouseenter', 'places', function () {
-    map.getCanvas().style.cursor = 'pointer';
+var markerGastro = L.marker([43.6490449,
+    0.5885573000000477], { icon: gastro }).addTo(mymap);
+
+markerGastro.bindPopup("<b>LA MIE CALINE</b><br>I am a popup.").openPopup();
+
+// Marker autres
+
+var autres = L.icon({
+    iconUrl: 'www/images/autres.png',
+    iconSize: [38, 38], // size of the icon
+
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'places', function () {
-    map.getCanvas().style.cursor = '';
+var markerAutres = L.marker([43.6339184, 0.5826869], { icon: autres }).addTo(mymap);
+markerAutres.bindPopup("<b>GEGG</b><br>bureaux").openPopup();
+
+//Bien être
+
+var bien = L.icon({
+    iconUrl: 'www/images/bienEtre.png',
+    iconSize: [38, 38], // size of the icon
+
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
+var markerBien = L.marker([43.6486, 0.5907159999999294], { icon: bien }).addTo(mymap);
+markerBien.bindPopup("<b>YVES</b><br>Produit de Beauté et Soins").openPopup();
+
+//loisirs
+
+var loisirs = L.icon({
+    iconUrl: 'www/images/loisirs.png',
+    iconSize: [38, 38], // size of the icon
+
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var markerLoisirs = L.marker([43.6482, 0.583486999999991], { icon: loisirs }).addTo(mymap);
+markerLoisirs.bindPopup("<b>MOVIDA</b><br>Salle de Sport").openPopup();
+
+//services
+
+var services = L.icon({
+    iconUrl: 'www/images/services.png',
+    iconSize: [38, 38], // size of the icon
+
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var markerServices = L.marker([43.6659249, 0.39368869999998424], { icon: services }).addTo(mymap);
+markerServices.bindPopup("<b>JEROME NARBONNE PHOTOGRAPHE</b><br>Réduction de 10% sur les tarifs affichés").openPopup();
+
+// tourisme
+
+var tourisme = L.icon({
+    iconUrl: 'www/images/tourisme.png',
+    iconSize: [38, 38], // size of the icon
+
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var markerTourisme = L.marker([43.714038, 0.032411000000024615], { icon: tourisme }).addTo(mymap);
+markerTourisme.bindPopup("<b>PALMERAIE DU SARTHOU</b><br>Oasis de 8ha à visiter , randonnées botanique, verger conservatoire, pépinière.").openPopup();
+
+// Magasins spécialisés
+
+var shop = L.icon({
+    iconUrl: 'www/images/shop.png',
+    iconSize: [38, 38], // size of the icon
+
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var markerShop = L.marker([43.648459, 0.585407000000032], { icon: shop }).addTo(mymap);
+markerShop.bindPopup("<b>ATELIER D'ART FLORAL Munier</b><br>10% de remise sur tout achat fleurs plantes vases chocolats déco confiseries …").openPopup();
+
+/*********END OF CUSTOM ICON*****************/
 
 /**************************************************
  * 
  * 
- * call function to init db and get datas for front
+ * call function to init db and get datas and create tables in local
  *
  * *******************************************************/
 
@@ -203,3 +189,6 @@ function searchAllPartners(tx) {
         return partners;
     });
 }
+
+
+
