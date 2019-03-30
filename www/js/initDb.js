@@ -5,6 +5,8 @@ var db = window.openDatabase("database", "1.0", "Cordova Demo", 200000);
 var allPartners;
 var allCategories;
 var allEmployee;
+var allDiscount;
+
 
 //this function fill all tables of the db
 function fillDB(tx) {
@@ -30,18 +32,16 @@ function fillDB(tx) {
         db.transaction(fillOffers, errorCB, successCB);
         db.transaction(fillAdresses, errorCB, successCB);
         db.transaction(fillContacts, errorCB, successCB);
-
+        // db.transaction(fillDiscount, errorCB, successCB);
     });
     $.ajax({
         type: "get",
         url: "json/employee.json",
         dataType: "json"
     }).done(function (data2) {
-        console.log(data2),
-            allEmployee = data2;
+        console.log(data2);
+        allEmployee = data2;
         db.transaction(fillEmployee, errorCB, successCB);
-        // CAREFUL NEED TO FIND SOLUTION TO FILL USER WITH AJX REQUEST FROM PARTNERS AND EMPLOYEE IN NEXT VERSION OF MY GEGG
-        db.transaction(fillUsers, errorCB, successCB);
     });
 }
 // funtion error or success for fill db
@@ -55,7 +55,11 @@ function successCB() {
 
 
 
-//functions to fill each tables of database 
+//***************************************************** */
+//functions to create and fill each tables of database 
+//************************************************************* */
+
+// CATEGORIES TABLE
 function fillCategories(tx) {
     console.log("testfillCate");
     tx.executeSql("DROP TABLE IF EXISTS categories");
@@ -68,27 +72,32 @@ function fillCategories(tx) {
     }
 }
 
+// PARTNERS TABLE
 function fillPartners(tx) {
     console.log("testfillPartners");
     tx.executeSql("DROP TABLE IF EXISTS partners");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS partners (partner_id unique, partner_name, partner_site,twitter_link, facebook_link, partner_desc, partner_activity, partner_tel, partner_img,fk_adresses, fk_offers, fk_contacts)");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS partners (partner_id unique, partner_name, partner_site,twitter_link, facebook_link, partner_desc, partner_activity, partner_tel, partner_img,fk_adresses, offer_types, fk_contacts)");
     for (var i = 0; i < allPartners.length; i++) {
         console.log("loop into partners");
-        var sql = 'INSERT INTO partners (partner_id, partner_name, partner_site,twitter_link, facebook_link, partner_desc, partner_activity, partner_tel, partner_img,fk_adresses, fk_offers, fk_contacts) VALUES ('
-            + allPartners[i].id + ', "' + allPartners[i].nomEntreprise + '", "' + allPartners[i].siteWeb + '", "' + allPartners[i].twitter_link + '", "' + allPartners[i].facebook_link + '", "' + allPartners[i].descriptionEntreprise + '", "' + allPartners[i].typeActivite + '", "' + allPartners[i].telephoneEntreprise + '", "' + allPartners[i].imageEntreprise + '", "' + allPartners[i].fk_adresses + '", "' + allPartners[i].fk_offers + '", "' + allPartners[i].fk_contacts + '") ';
+        var sql = 'INSERT INTO partners (partner_id, partner_name, partner_site,twitter_link, facebook_link, partner_desc, partner_activity, partner_tel, partner_img,fk_adresses, offer_types, fk_contacts) VALUES ('
+            + allPartners[i].id + ', "' + allPartners[i].nomEntreprise + '", "' + allPartners[i].siteWeb + '", "' + allPartners[i].twitter_link + '", "' + allPartners[i].facebook_link + '", "' + allPartners[i].descriptionEntreprise + '", "' + allPartners[i].typeActivite + '", "' + allPartners[i].telephoneEntreprise + '", "' + allPartners[i].imageEntreprise + '", "' + allPartners[i].fk_adresses + '", "' + allPartners[i].offer_types + '", "' + allPartners[i].fk_contacts + '") ';
         tx.executeSql(sql);
     }
 }
+
+// OFFERS TABLE
 function fillOffers(tx) {
     console.log("test function fillOffers");
     tx.executeSql("DROP TABLE IF EXISTS offers");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS offers (offer_desc, offer_modality, fk_partners, fk_categories, fk_discount)");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS offers (offer_desc, offer_modality,offer_type, fk_partners, fk_categories, fk_discount)");
     for (var i = 0; i < allPartners.length; i++) {
         console.log("loop into Partners to get offer");
-        var sql = 'INSERT INTO offers (offer_desc, offer_modality, fk_partners, fk_categories, fk_discount) VALUES ("' + allPartners[i].descriptifOffre + '", "' + allPartners[i].modalitesOffre + '", "' + allPartners[i].fk_partners + '", "' + allPartners[i].fk_categories + '", "' + allPartners[i].fk_discount + '")';
+        var sql = 'INSERT INTO offers (offer_desc, offer_modality, offer_type, fk_partners, fk_categories, fk_discount) VALUES ("' + allPartners[i].descriptifOffre + '", "' + allPartners[i].modalitesOffre + '", "' + allPartners[i].typeOffre + '","' + allPartners[i].fk_partners + '", "' + allPartners[i].fk_categories + '", "' + allPartners[i].fk_discount + '")';
         tx.executeSql(sql);
     }
 }
+
+// ADRESSES TABLE
 function fillAdresses(tx) {
     console.log("testAdresses");
     tx.executeSql("DROP TABLE IF EXISTS adresses");
@@ -99,6 +108,8 @@ function fillAdresses(tx) {
         tx.executeSql(sql);
     }
 }
+
+// CONTACTS TABLE
 function fillContacts(tx) {
     console.log("test fill contact");
     tx.executeSql("DROP TABLE IF EXISTS contacts");
@@ -109,16 +120,35 @@ function fillContacts(tx) {
         tx.executeSql(sql);
     }
 }
+
+
+// EMPLOYEE TABLE
 function fillEmployee(tx) {
     console.log("test fill employee");
     tx.executeSql("DROP TABLE IF EXISTS employee");
     tx.executeSql("CREATE TABLE IF NOT EXISTS employee(id_gegg, employee_name, employee_firstName, employee_mail, admin)");
     for (var i = 0; i < allEmployee.length; i++) {
         console.log("loop into employee");
-        var sql = 'INSERT INTO employee(id_gegg, employee_name, employee_firstName, employee_mail, admin) VALUES (' + allEmployee[i].employee_id + ',' + allEmployee[i].gegg_id + ', "' + allEmployee[i].name_employee + '","' + allEmployee[i].firstName_employee + '","' + allEmployee[i].mail_employee + '","' + allEmployee[i].admin + '")';
+        var sql = 'INSERT INTO employee(id_gegg, employee_name, employee_firstName, employee_mail, admin) VALUES ("' + allEmployee[i].gegg_id + '", "' + allEmployee[i].name_employee + '","' + allEmployee[i].firstName_employee + '","' + allEmployee[i].mail_employee + '","' + allEmployee[i].admin + '")';
         tx.executeSql(sql);
     }
 }
+
+// DISCOUNT TABLE  // attention rajouter champs nom reduction dans fichier excell
+
+// function fillDiscount(tx) {
+//     console.log("test function fillDiscount");
+//     tx.executeSql("DROP TABLE IF EXISTS discount");
+//     tx.executeSql("CREATE TABLE IF NOT EXISTS discount (discount_name, offer_type)");
+//     for (var i = 0; i < allPartners.length; i++) {
+//         console.log("loop into Partners to get discount");
+//         var sql = 'INSERT INTO discount (discount_name, offer_type) VALUES ("' + allPartners[i].discount_name + '", "' + allPartners[i].typeOffre + '")';
+//         tx.executeSql(sql);
+//     }
+//}
+
+// USERS TABLE
+
 // A REPRENDRE AVEC LA FONCTION S'INSCRIRE QUI VA REMPLIR LES CHAMPS
 //
 // function fillUsers(tx) {
@@ -130,4 +160,8 @@ function fillEmployee(tx) {
 //         var sql = 'INSERT INTO users (user_pwd, user_mail)'
 //     }
 // }
+
+
+
+
 

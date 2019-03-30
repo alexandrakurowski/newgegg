@@ -1,38 +1,82 @@
 console.log("hellogegg");
 
+document.addEventListener('deviceready', start, false);
 
-/* function to init app */
-
-// var app = {
-//     // Application Constructor
-//     initialize: function () {
-//         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-//     },
-
-//     // deviceready Event Handler
-//     //
-//     // Bind any cordova events here. Common events are:
-//     // 'pause', 'resume', etc.
-//     onDeviceReady: function () {
-//         this.receivedEvent('deviceready');
-
-//     },
-
-// Update DOM on a Received Event
-// receivedEvent: function (id) {
-//     var parentElement = document.getElementById(id);
-//     var listeningElement = parentElement.querySelector('.listening');
-//     var receivedElement = parentElement.querySelector('.received');
-
-//     listeningElement.setAttribute('style', 'display:none;');
-//     receivedElement.setAttribute('style', 'display:block;');
-
-//     //     console.log('Received Event: ' + id);
-//     // }
-// };
-
-// app.initialize();
 /******************slidebar */
+var categories;
+var discount;
+var str = "";
+var displayForm = false;
+var current;
+var byCat = [];
+var numberOfTurn = 0;
+var byCategory = [];
+
+// start when device is ready
+function start() {
+    db.transaction(fillDB, errorCB, successCB);
+
+}
+
+/***************EVENTS WITH CATEGORIES */
+
+function searchAllCategories(tx) {
+    tx.executeSql('SELECT * FROM categories ORDER BY category_name ASC;', [], function (tx, result) {
+        categories = result.rows;
+        console.log(categories)
+        return categories;
+    });
+}
+
+/***
+ * Button Categories Navbar
+ */
+
+$('#selectCat').one('click', function () {
+    db.transaction(searchAllCategories, console.log("categories OK"), function () {
+        for (var i = 0; i < categories.length; i++) {
+            $('#listCat').append('<a href="#layer cate id" selected="selected" id="' + categories[i].category_id + '" value="' + categories[i].category_id + '">' + categories[i].category_name + '</a>');
+        }
+        return categories;
+    });
+});
+/***
+ * Link search by categories
+ */
+
+$('#selectCat').change(function () {
+    str = $(this).children(":selected").attr("id");
+    console.log(str);
+    db.transaction(searchByCategory, errorCB, successCB);
+});
+
+/***************EVENTS WITH DISCOUNT */
+
+// function searchAllDiscount(tx) {
+//     tx.executeSql('SELECT offer_type FROM discount ORDER BY offer_type ASC;', [], function (tx, result) {
+//         discount = result.rows;
+//         console.log(discount)
+//         return discount;
+//     });
+// }
+// /***
+//  * Button discount Navbar
+//  */
+
+// $('#selectDiscount').one('click', function () {
+//     db.transaction(searchAllDiscount, console.log("discount OK"), function () {
+//         for (var i = 0; i < discount.length; i++) {
+//             $('#listDiscount').append('<a href="#" id="' + discount[i].discount_id + '" value="' + discount[i].discount_id + '">' + discount[i].offer_type + '</a>');
+//         }
+//         return discount;
+//     });
+// });
+
+
+$('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+    $(this).toggleClass('active');
+});
 
 
 
@@ -53,10 +97,69 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1Ijoia2FjcmVhdGlvbiIsImEiOiJjanN0Zm5tYmgxd3N0NDlvNHd5b2JzY3dnIn0.PWhJG8uoe3_okpyIBmvzVA'
 }).addTo(mymap);
 
-// ************customize icon for markers of categories************** //
+//************AJAX REQUEST TO GET INFOS FROM PARTNERS**********
+//***************************************************************
 //
+
+//     for(var i = 0; i < donnees.length; i++)
+// {
+//     tableau.push([donnees[i].coordonneesX, donness[i].coordonneesY, donnees[i].nom]);
+// }
+
+
+// ************customize icon for markers of categories************** //
+// //var myItems = [
+//     ["Notre Dame de Paris", 48.853056, 2.349722],
+//     ["Musée d'Orsay", 48.86, 2.327],
+//     ["Muséum National d'Histoire Naturelle", 48.8422, 2.3564]
+// ];
+// for (var i = 0; i < myItems.length; i++) {
+//     var item = myItems[i];
+//     marker = new L.marker([item[1],item[2]]).bindPopup(item[0]).addTo(map);
+// // }
+// var markers/nom cate/ = new L.layerGroup();
+// for (var i = 0; i < myItems.length; i++) {
+//     var item = myItems[i];
+//     marker = new L.marker([item[1],item[2]]).bindPopup(item[0]);
+//     markers.addLayer(marker);
+// }
+// map.addLayer(markers);
 //**************************************************************** */
+// function searchOffersByCategory(tx) {
+//     var catId = parseInt(str);
+//     numberOfTurn = 0;
+
+//     tx.executeSql('SELECT fk_picture FROM to_belong WHERE fk_category = ' + catId + ';', [], function (tx, result) {
+//         var pic_in_cat = result.rows;
+//         var picturesFromCategories = [];
+//         byCat = [];
+//         for (var i = 0; i < pic_in_cat.length; i++) {
+//             picturesFromCategories.push(pic_in_cat[i].fk_picture);
+//         }
+//         for (var i = 0; i < picturesFromCategories.length; i++) {
+//             tx.executeSql('SELECT * FROM pictures WHERE picture_id=' + picturesFromCategories[i] + ';', [], function (tx, picturesFromThisCat) {
+//                 byCat.push(picturesFromThisCat.rows[0]);
+//                 if (numberOfTurn == picturesFromCategories.length - 1) {
+//                     for (var b = 0; b < byCat.length; b++) {
+//                         byCategory.push(byCat[b]);
+//                     }
+//                     displaySearchByCategory(byCategory);
+//                     byCategory = [];
+//                     byCat = [];
+//                 }
+//                 numberOfTurn++;
+//             });
+//         }
+//     });
+
+// }
+
 // Marker gastro&alim
+// var allGastroOffers;
+// for (var i = 0; i < allPartners.length; i++) {
+//     allGastro.push([allPartners[i].nomEntreprise, allPartners[i].lat, allPartners[i].long]);
+//     console.log(allGastro);
+// }
 
 var gastro = L.icon({
     iconUrl: 'www/images/alimentation.png',
@@ -157,38 +260,4 @@ var markerShop = L.marker([43.648459, 0.585407000000032], { icon: shop }).addTo(
 markerShop.bindPopup("<b>ATELIER D'ART FLORAL Munier</b><br>10% de remise sur tout achat fleurs plantes vases chocolats déco confiseries …").openPopup();
 
 /*********END OF CUSTOM ICON*****************/
-
-/**************************************************
- * 
- * 
- * call function to init db and get datas and create tables in local
- *
- * *******************************************************/
-
-document.addEventListener('deviceready', start, false);
-
-var categories;
-var partners;
-
-function start() {
-    db.transaction(fillDB, errorCB, successCB);
-
-}
-
-function searchAllCategories(tx) {
-    tx.executeSql('SELECT * FROM categories ORDER BY category_name ASC;', [], function (tx, result) {
-        categories = result.rows;
-        console.log(categories);
-        return categories;
-    });
-}
-function searchAllPartners(tx) {
-    tx.executeSql('SELECT * FROM partners ORDER BY id ASC;', [], function (tx, result) {
-        partners = result.rows;
-        console.log(partners);
-        return partners;
-    });
-}
-
-
 
