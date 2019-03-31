@@ -28,14 +28,38 @@ function searchAllCategories(tx) {
     });
 }
 
+function searchOffersByCategory(tx) {
+    var catId = parseInt(str);
+    console.log(catId);
+    numberOfTurn = 0;
+
+    tx.executeSql('SELECT * FROM partners WHERE fk_category = ' + catId + ';', [], function (tx, result) {
+        var allOfferByCat = result.rows;
+        console.log(allOfferByCat);
+
+        var offersFromCategories = [];
+        byCat = [];
+        for (var i = 0; i < allOfferByCat.length; i++) {
+            offersFromCategories.push(allOfferByCat[i].partner_name, allOfferByCat[i].lat, allOfferByCat[i].long);
+            console.log(offersFromCategories);
+        }
+    });
+}
+
+// function displaySearchByCategory(byCategory) {
+//     resetInterface();
+//     for (var b = 0; b < byCategory.length; b++) {
+//         $('#display').append('<a href="' + byCategory[b].partner_name + '" data-lightbox="' + byCategory[b].picture_name + '" data-title="' + byCategory[b].picture_name + '" class="images"><img src="' + byCategory[b].picture_url + '" alt="' + byCategory[b].picture_name + '" /></a>');
+//     }
+// }
 /***
- * Button Categories Navbar
+ * Button  generatedCategories Navbar
  */
 
 $('#selectCat').one('click', function () {
     db.transaction(searchAllCategories, console.log("categories OK"), function () {
         for (var i = 0; i < categories.length; i++) {
-            $('#listCat').append('<a href="#layer cate id" selected="selected" id="' + categories[i].category_id + '" value="' + categories[i].category_id + '">' + categories[i].category_name + '</a>');
+            $('#listCat').append('<a href="#" id="' + categories[i].category_id + '" value="' + categories[i].category_id + '">' + categories[i].category_name + '</a>');
         }
         return categories;
     });
@@ -43,11 +67,10 @@ $('#selectCat').one('click', function () {
 /***
  * Link search by categories
  */
-
-$('#selectCat').change(function () {
-    str = $(this).children(":selected").attr("id");
-    console.log(str);
-    db.transaction(searchByCategory, errorCB, successCB);
+$('#listCat').on('click', function () {
+    console.log(event.target.id);
+    str = event.target.id;
+    db.transaction(searchOffersByCategory, errorCB, successCB);
 });
 
 /***************EVENTS WITH DISCOUNT */
@@ -63,14 +86,7 @@ $('#selectCat').change(function () {
 //  * Button discount Navbar
 //  */
 
-// $('#selectDiscount').one('click', function () {
-//     db.transaction(searchAllDiscount, console.log("discount OK"), function () {
-//         for (var i = 0; i < discount.length; i++) {
-//             $('#listDiscount').append('<a href="#" id="' + discount[i].discount_id + '" value="' + discount[i].discount_id + '">' + discount[i].offer_type + '</a>');
-//         }
-//         return discount;
-//     });
-// });
+
 
 
 $('#sidebarCollapse').on('click', function () {
@@ -82,9 +98,17 @@ $('#sidebarCollapse').on('click', function () {
 
 /******************************************************************
  * 
+* 
+ * 
+ * 
+* 
  * 
  * -------------------MAP with LEAFLET-------------------------------
  * 
+* 
+ * 
+ * 
+* 
  * 
  **********************************************************************************/
 
@@ -125,32 +149,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 // }
 // map.addLayer(markers);
 //**************************************************************** */
-// function searchOffersByCategory(tx) {
-//     var catId = parseInt(str);
-//     numberOfTurn = 0;
-
-//     tx.executeSql('SELECT fk_picture FROM to_belong WHERE fk_category = ' + catId + ';', [], function (tx, result) {
-//         var pic_in_cat = result.rows;
-//         var picturesFromCategories = [];
-//         byCat = [];
-//         for (var i = 0; i < pic_in_cat.length; i++) {
-//             picturesFromCategories.push(pic_in_cat[i].fk_picture);
-//         }
-//         for (var i = 0; i < picturesFromCategories.length; i++) {
-//             tx.executeSql('SELECT * FROM pictures WHERE picture_id=' + picturesFromCategories[i] + ';', [], function (tx, picturesFromThisCat) {
-//                 byCat.push(picturesFromThisCat.rows[0]);
-//                 if (numberOfTurn == picturesFromCategories.length - 1) {
-//                     for (var b = 0; b < byCat.length; b++) {
-//                         byCategory.push(byCat[b]);
-//                     }
-//                     displaySearchByCategory(byCategory);
-//                     byCategory = [];
-//                     byCat = [];
-//                 }
-//                 numberOfTurn++;
-//             });
-//         }
-//     });
 
 // }
 
