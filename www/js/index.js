@@ -10,6 +10,9 @@ var allOfferByCat;
 var byCat = [];
 var numberOfTurn = 0;
 var byCategory = [];
+var iconUrl;
+var iconMarkers;
+
 
 
 // start when device is ready
@@ -32,35 +35,73 @@ function searchOffersByCategory(tx) {
     var catId = parseInt(str);
     console.log(catId);
     numberOfTurn = 0;
+    listBycat = [];
 
     tx.executeSql('SELECT * FROM partners WHERE fk_category = ' + catId + ';', [], function (tx, result) {
         allOfferByCat = result.rows;
         console.log(allOfferByCat);
         var offersFromCat = [];
-        var byCat = [];
-        imgByCat = [];
+
+
         for (var i = 0; i < allOfferByCat.length; i++) {
             offersFromCat.push([allOfferByCat[i].lat, allOfferByCat[i].long, allOfferByCat[i].partner_name]);
             console.log(offersFromCat);
         }
-
-        displayMarkersByCat(offersFromCat);
-        offersFromCat = [];
     });
+
+    tx.executeSql('SELECT * FROM categories WHERE category_id = ' + catId + ';', [], function (tx, result) {
+        databyCat = result.rows;
+        console.log(databyCat);
+        var iconUrl = [];
+        for (var i = 0; i < databyCat.length; i++) {
+            iconUrl.push(databyCat[i].img_url);
+            console.log(iconUrl);
+        }
+    });
+    createIconByCAt(iconUrl);
+    console.log(iconUrl);
+    // iconUrl = [];
+    displayMarkersByCat(offersFromCat);
+    console.log(offersFromCat);
+    offersFromCat = [];
 }
 
-function displayMarkersByCat(offersFromCat) {
 
-    resetInterface();
-    var markers = new L.layerGroup();
-    for (var i = 0; i < offersFromCat; i++) {
-        var data = offersFromCat.rows;
-        console.log(data);
-        marker = new L.marker([data[i].lat, data[i].long]).bindPopup(data[i].partner_name);
-        markers.addLayer(marker);
-    }
-    mymap.addLayer(markers);
-}
+// function createIconByCAt(iconUrl) {
+//     console.log(iconUrl);
+//     var iconMarkers = L.icon({
+//         iconUrl: iconUrl,
+//         iconSize: [38, 38], // size of the icon
+
+//         iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+
+//         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+
+//     })
+
+//     function displayMarkersByCat(offersFromCat, iconUrl) {
+//         console.log(offersFromCat);
+//         console.log(iconUrl);
+//         resetInterface();
+
+
+//         var markers = new L.layerGroup();
+//         for (var i = 0; i < offersFromCat.length; i++) {
+//             var data = offersFromCat[i];
+
+//             console.log(data[i]);
+//             console.log(data[i][0]);
+//             marker = new L.marker([data[i][0], data[i][1]]).bindPopup(data[i][2]);
+
+//             markers.addLayer(marker, { icon: iconUrl });
+//         }
+//         (markers, { icon: iconMarkers });
+//     }
+// }
+// var markerGastro = L.marker([43.6490449,
+//     0.5885573000000477], { icon: gastro }).addTo(mymap);
+
+// markerGastro.bindPopup("<b>LA MIE CALINE</b><br>I am a popup.").openPopup();
 
 // for (var i = 0; i < myItems.length; i++) {
 //     var item = myItems[i];
@@ -69,12 +110,7 @@ function displayMarkersByCat(offersFromCat) {
 // }
 // map.addLayer(markers);
 // }
-// function displaySearchByCategory(allOfferByCat) {
-//     resetInterface();
-//     for (var b = 0; b < byCategory.length; b++) {
-//         $('#display').append('<a href="' + byCategory[b].partner_name + '" data-lightbox="' + byCategory[b].picture_name + '" data-title="' + byCategory[b].picture_name + '" class="images"><img src="' + byCategory[b].picture_url + '" alt="' + byCategory[b].picture_name + '" /></a>');
-//     }
-// }
+
 /***
  * Button  generatedCategories Navbar
  */
@@ -168,10 +204,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 // map.addLayer(markers);
 // }
 //**************************************************************** */
-function addMarkersByCat() {
 
-    console.log(allOfferByCat);
-}
 
 
 // Marker gastro&alim
@@ -188,8 +221,9 @@ var gastro = L.icon({
     iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
 
     popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
 
+});
+console.log(gastro);
 var markerGastro = L.marker([43.6490449,
     0.5885573000000477], { icon: gastro }).addTo(mymap);
 
