@@ -18,7 +18,6 @@ var iconMarkers;
 // start when device is ready
 function start() {
     db.transaction(fillDB, errorCB, successCB);
-
 }
 
 /***************EVENTS WITH CATEGORIES */
@@ -41,10 +40,6 @@ function searchOffersByCategory(tx) {
         allOfferByCat = result.rows;
         console.log(allOfferByCat);
         var offersFromCat = [];
-
-
-
-
         for (var i = 0; i < allOfferByCat.length; i++) {
             offersFromCat.push([allOfferByCat[i].lat, allOfferByCat[i].long, allOfferByCat[i].partner_name]);
             console.log(offersFromCat);
@@ -55,15 +50,19 @@ function searchOffersByCategory(tx) {
     offersFromCat = [];
     });
 
-    // tx.executeSql('SELECT * FROM categories WHERE category_id = ' + catId + ';', [], function (tx, result) {
-    //     databyCat = result.rows;
-    //     console.log(databyCat);
-    //     var iconUrl = [];
-    //     for (var i = 0; i < databyCat.length; i++) {
-    //         iconUrl.push(databyCat[i].img_url);
-    //         console.log(iconUrl);
-    //     }
-    // });
+    tx.executeSql('SELECT * FROM categories WHERE category_id = ' + catId + ';', [], function (tx, result) {
+        databyCat = result.rows;
+        console.log(databyCat);
+        var iconUrl = [];
+        for (var i = 0; i < databyCat.length; i++) {
+            iconUrl.push(databyCat[i].img_url);
+            console.log(iconUrl);
+        }
+        displayIconByCat(iconUrl);
+        console.log(iconUrl);
+        iconUrl = [];
+
+    });
    
   
 }
@@ -124,7 +123,7 @@ function searchOffersByCategory(tx) {
 //         (markers, { icon: iconMarkers });
 //     }
 // }
->>>>>>> b1a9631052fe00024a836ac041c0710f84a8c254
+
 // var markerGastro = L.marker([43.6490449,
 //     0.5885573000000477], { icon: gastro }).addTo(mymap);
 
