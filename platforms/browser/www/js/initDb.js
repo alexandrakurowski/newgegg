@@ -76,11 +76,19 @@ function fillCategories(tx) {
 function fillPartners(tx) {
     console.log("testfillPartners");
     tx.executeSql("DROP TABLE IF EXISTS partners");
+<<<<<<< HEAD
     tx.executeSql("CREATE TABLE IF NOT EXISTS partners (partner_id unique, partner_name, partner_site, lat, long, partner_desc, partner_img, offer_types, fk_category INTEGER, FOREIGN KEY(fk_category) REFERENCES categories (category_id))");
     for (var i = 0; i < allPartners.length; i++) {
         console.log("loop into partners");
         var sql = 'INSERT INTO partners (partner_id, partner_name, partner_site,lat, long, partner_desc, partner_img, offer_types,fk_category) VALUES ('
             + allPartners[i].id + ', "' + allPartners[i].nomEntreprise + '", "' + allPartners[i].siteWeb + '","' + allPartners[i].lat + '", "' + allPartners[i].long + '","' + allPartners[i].descriptionEntreprise + '","' + allPartners[i].imageEntreprise + '", "' + allPartners[i].typeOffre + '", "' + allPartners[i].fk_category + '" )';
+=======
+    tx.executeSql("CREATE TABLE IF NOT EXISTS partners (partner_id unique, partner_name, partner_site, lat FLOAT, long FLOAT, partner_desc, partner_img, offer_types, INTEGER, fk_category INTEGER, FOREIGN KEY(fk_category) REFERENCES categories (category_id))");
+    for (var i = 0; i < allPartners.length; i++) {
+        console.log("loop into partners");
+        var sql = 'INSERT INTO partners (partner_id, partner_name, partner_site,lat, long, partner_desc, partner_img, offer_types,fk_category) VALUES ('
+            + allPartners[i].id + ', "' + allPartners[i].nomEntreprise + '", "' + allPartners[i].siteWeb + '","' + allPartners[i].lat + '", "' + allPartners[i].long + '","' + allPartners[i].descriptionEntreprise + '","' + allPartners[i].imageEntreprise + '", "' + allPartners[i].offer_types + '", "' + allPartners[i].fk_category + '" )';
+>>>>>>> b1a9631052fe00024a836ac041c0710f84a8c254
         tx.executeSql(sql);
     }
 }

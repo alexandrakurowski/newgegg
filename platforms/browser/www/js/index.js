@@ -41,10 +41,16 @@ function searchOffersByCategory(tx) {
         allOfferByCat = result.rows;
         console.log(allOfferByCat);
         var offersFromCat = [];
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b1a9631052fe00024a836ac041c0710f84a8c254
         for (var i = 0; i < allOfferByCat.length; i++) {
             offersFromCat.push([allOfferByCat[i].lat, allOfferByCat[i].long, allOfferByCat[i].partner_name]);
             console.log(offersFromCat);
         }
+<<<<<<< HEAD
     displayMarkersByCat(offersFromCat);
     console.log(offersFromCat);
     offersFromCat = [];
@@ -85,6 +91,59 @@ function searchOffersByCategory(tx) {
         // map.addLayer(markers);
     }
 
+=======
+    });
+
+    tx.executeSql('SELECT * FROM categories WHERE category_id = ' + catId + ';', [], function (tx, result) {
+        databyCat = result.rows;
+        console.log(databyCat);
+        var iconUrl = [];
+        for (var i = 0; i < databyCat.length; i++) {
+            iconUrl.push(databyCat[i].img_url);
+            console.log(iconUrl);
+        }
+    });
+    createIconByCAt(iconUrl);
+    console.log(iconUrl);
+    // iconUrl = [];
+    displayMarkersByCat(offersFromCat);
+    console.log(offersFromCat);
+    offersFromCat = [];
+}
+
+
+// function createIconByCAt(iconUrl) {
+//     console.log(iconUrl);
+//     var iconMarkers = L.icon({
+//         iconUrl: iconUrl,
+//         iconSize: [38, 38], // size of the icon
+
+//         iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+
+//         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+
+//     })
+
+//     function displayMarkersByCat(offersFromCat, iconUrl) {
+//         console.log(offersFromCat);
+//         console.log(iconUrl);
+//         resetInterface();
+
+
+//         var markers = new L.layerGroup();
+//         for (var i = 0; i < offersFromCat.length; i++) {
+//             var data = offersFromCat[i];
+
+//             console.log(data[i]);
+//             console.log(data[i][0]);
+//             marker = new L.marker([data[i][0], data[i][1]]).bindPopup(data[i][2]);
+
+//             markers.addLayer(marker, { icon: iconUrl });
+//         }
+//         (markers, { icon: iconMarkers });
+//     }
+// }
+>>>>>>> b1a9631052fe00024a836ac041c0710f84a8c254
 // var markerGastro = L.marker([43.6490449,
 //     0.5885573000000477], { icon: gastro }).addTo(mymap);
 
