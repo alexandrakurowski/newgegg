@@ -1,36 +1,36 @@
 [
     {
-        "category_id": "1",
+        "category_id": 1,
         "category_name": "Gastronomie et Alimentation",
         "img_url": "images/alimentation.png"
     },
     {
-        "category_id": "2",
+        "category_id": 2,
         "category_name": "Tourisme",
         "img_url": "images/tourisme.png"
     },
     {
-        "category_id": "3",
+        "category_id": 3,
         "category_name": "Sport & Loisirs",
         "img_url": "images/loisirs.png"
     },
     {
-        "category_id": "4",
+        "category_id": 4,
         "category_name": "Magasins Spécialisés",
         "img_url": "images/shop.png"
     },
     {
-        "category_id": "5",
+        "category_id": 5,
         "category_name": "Services",
         "img_url": "images/services.png"
     },
     {
-        "category_id": "6",
+        "category_id": 6,
         "category_name": "Bien-être & Santé",
         "img_url": "images/bienEtre.png"
     },
     {
-        "category_id": "7",
+        "category_id": 7,
         "category_name": "Autres",
         "img_url": "images/autres.png"
     }

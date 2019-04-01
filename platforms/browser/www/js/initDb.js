@@ -71,16 +71,16 @@ function fillCategories(tx) {
         tx.executeSql(sql);
     }
 }
-
+//fk_picture INTEGER, fk_category INTEGER, FOREIGN KEY(fk_picture) REFERENCES pictures(picture_id), FOREIGN KEY(fk_category) REFERENCES categories(category_id))
 // PARTNERS TABLE
 function fillPartners(tx) {
     console.log("testfillPartners");
     tx.executeSql("DROP TABLE IF EXISTS partners");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS partners (partner_id unique, partner_name, partner_site,twitter_link, facebook_link, partner_desc, partner_activity, partner_tel, partner_img,fk_adresses, offer_types, fk_contacts)");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS partners (partner_id unique, partner_name, partner_site, lat, long, partner_desc, partner_img, offer_types, fk_category INTEGER, FOREIGN KEY(fk_category) REFERENCES categories (category_id))");
     for (var i = 0; i < allPartners.length; i++) {
         console.log("loop into partners");
-        var sql = 'INSERT INTO partners (partner_id, partner_name, partner_site,twitter_link, facebook_link, partner_desc, partner_activity, partner_tel, partner_img,fk_adresses, offer_types, fk_contacts) VALUES ('
-            + allPartners[i].id + ', "' + allPartners[i].nomEntreprise + '", "' + allPartners[i].siteWeb + '", "' + allPartners[i].twitter_link + '", "' + allPartners[i].facebook_link + '", "' + allPartners[i].descriptionEntreprise + '", "' + allPartners[i].typeActivite + '", "' + allPartners[i].telephoneEntreprise + '", "' + allPartners[i].imageEntreprise + '", "' + allPartners[i].fk_adresses + '", "' + allPartners[i].offer_types + '", "' + allPartners[i].fk_contacts + '") ';
+        var sql = 'INSERT INTO partners (partner_id, partner_name, partner_site,lat, long, partner_desc, partner_img, offer_types,fk_category) VALUES ('
+            + allPartners[i].id + ', "' + allPartners[i].nomEntreprise + '", "' + allPartners[i].siteWeb + '","' + allPartners[i].lat + '", "' + allPartners[i].long + '","' + allPartners[i].descriptionEntreprise + '","' + allPartners[i].imageEntreprise + '", "' + allPartners[i].typeOffre + '", "' + allPartners[i].fk_category + '" )';
         tx.executeSql(sql);
     }
 }
@@ -89,10 +89,10 @@ function fillPartners(tx) {
 function fillOffers(tx) {
     console.log("test function fillOffers");
     tx.executeSql("DROP TABLE IF EXISTS offers");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS offers (offer_desc, offer_modality,offer_type, fk_partners, fk_categories, fk_discount)");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS offers ( partner_id, offer_desc, offer_modality, offer_type, partner_name, lat, long,fk_category, fk_discount)");
     for (var i = 0; i < allPartners.length; i++) {
         console.log("loop into Partners to get offer");
-        var sql = 'INSERT INTO offers (offer_desc, offer_modality, offer_type, fk_partners, fk_categories, fk_discount) VALUES ("' + allPartners[i].descriptifOffre + '", "' + allPartners[i].modalitesOffre + '", "' + allPartners[i].typeOffre + '","' + allPartners[i].fk_partners + '", "' + allPartners[i].fk_categories + '", "' + allPartners[i].fk_discount + '")';
+        var sql = 'INSERT INTO offers (partner_id ,offer_desc, offer_modality, offer_type, partner_name, lat, long, fk_category, fk_discount) VALUES ("' + allPartners[i].partner_id + '","' + allPartners[i].descriptifOffre + '", "' + allPartners[i].modalitesOffre + '", "' + allPartners[i].typeOffre + '","' + allPartners[i].partner_name + '","' + allPartners[i].lat + '","' + allPartners[i].long + '", "' + allPartners[i].fk_category + '", "' + allPartners[i].fk_discount + '")';
         tx.executeSql(sql);
     }
 }
@@ -101,10 +101,10 @@ function fillOffers(tx) {
 function fillAdresses(tx) {
     console.log("testAdresses");
     tx.executeSql("DROP TABLE IF EXISTS adresses");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS adresses(street_number, street_name, town, postal_code, lat, long, fk_partners)");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS adresses(street_number, street_name, town, postal_code, lat, long, partner_name)");
     for (var i = 0; i < allPartners.length; i++) {
         console.log("loop into partners/adresses")
-        var sql = 'INSERT INTO adresses(street_number, street_name, town, postal_code, lat, long, fk_partners) VALUES("' + allPartners[i].numeroRue + '","' + allPartners[i].nomRue + '", "' + allPartners[i].ville + '", "' + allPartners[i].codePostal + '", "' + allPartners[i].lat + '", "' + allPartners[i].long + '", "' + allPartners[i].fk_partners + '")';
+        var sql = 'INSERT INTO adresses(street_number, street_name, town, postal_code, lat, long, partner_name) VALUES("' + allPartners[i].numeroRue + '","' + allPartners[i].nomRue + '", "' + allPartners[i].ville + '", "' + allPartners[i].codePostal + '", "' + allPartners[i].lat + '", "' + allPartners[i].long + '", "' + allPartners[i].partner_name + '")';
         tx.executeSql(sql);
     }
 }
@@ -113,10 +113,10 @@ function fillAdresses(tx) {
 function fillContacts(tx) {
     console.log("test fill contact");
     tx.executeSql("DROP TABLE IF EXISTS contacts");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS contacts(contact_name, contact_role, contact_mail, contact_tel, fk_partners)");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS contacts(contact_name, contact_role, contact_mail, contact_tel, partner_name)");
     for (var i = 0; i < allPartners.length; i++) {
         console.log("loop into partners/contact");
-        var sql = 'INSERT INTO contacts (contact_name, contact_role, contact_mail, contact_tel, fk_partners) VALUES ("' + allPartners[i].nomContact + '", "' + allPartners[i].roleContact + '", "' + allPartners[i].mailContact + '", "' + allPartners[i].telContact + '", "' + allPartners[i].fk_partners + '")';
+        var sql = 'INSERT INTO contacts (contact_name, contact_role, contact_mail, contact_tel, partner_name) VALUES ("' + allPartners[i].nomContact + '", "' + allPartners[i].roleContact + '", "' + allPartners[i].mailContact + '", "' + allPartners[i].telContact + '", "' + allPartners[i].partner_name + '")';
         tx.executeSql(sql);
     }
 }
@@ -154,7 +154,7 @@ function fillEmployee(tx) {
 // function fillUsers(tx) {
 //     console.log(" test function fill user");
 //     tx.executeSql("DROP TABLE IF EXISTS users");
-//     tx.executeSql("CREATE TABLE IF NOT EXISTS users(user_pwd, user_mail, fk_employee)");  // BEWARE no fk_partners init in V1
+//     tx.executeSql("CREATE TABLE IF NOT EXISTS users(user_pwd, user_mail, fk_employee)");  // BEWARE no partner_name init in V1
 //     for (var i = 0; i < allEmployee.length; i++){
 //         console.log("loop into employee ");
 //         var sql = 'INSERT INTO users (user_pwd, user_mail)'
