@@ -6,11 +6,11 @@ document.addEventListener('deviceready', start, false);
 var categories;
 var discount;
 var str = "";
-var displayForm = false;
-var current;
+var allOfferByCat;
 var byCat = [];
 var numberOfTurn = 0;
 var byCategory = [];
+
 
 // start when device is ready
 function start() {
@@ -34,35 +34,42 @@ function searchOffersByCategory(tx) {
     numberOfTurn = 0;
 
     tx.executeSql('SELECT * FROM partners WHERE fk_category = ' + catId + ';', [], function (tx, result) {
-        var allOfferByCat = result.rows;
+        allOfferByCat = result.rows;
         console.log(allOfferByCat);
-
-        var offersFromCategories = [];
-        byCat = [];
+        var offersFromCat = [];
+        var byCat = [];
+        imgByCat = [];
         for (var i = 0; i < allOfferByCat.length; i++) {
-            offersFromCategories.push(allOfferByCat[i].partner_name, allOfferByCat[i].lat, allOfferByCat[i].long);
-            console.log(offersFromCategories);
+            offersFromCat.push([allOfferByCat[i].lat, allOfferByCat[i].long, allOfferByCat[i].partner_name]);
+            console.log(offersFromCat);
         }
 
-        for (var i = 0; i < offersFromCategories.length; i++) {
-            function pushArray(tx, offersFromThisCat) {
-                byCat.push(offersFromThisCat.rows[0]);
-                if (numberOfTurn == offersFromCategories.length - 1) {
-                    for (var b = 0; b < byCat.length; b++) {
-                        byCategory.push(byCat[b]);
-                    }
-                    displaySearchByCategory(byCategory);
-                    byCategory = [];
-                    byCat = [];
-                    console.log(byCategory);
-                }
-                numberOfTurn++;
-            }
-        }
+        displayMarkersByCat(offersFromCat);
+        offersFromCat = [];
     });
 }
-console.log(byCategory);
-// function displaySearchByCategory(byCategory) {
+
+function displayMarkersByCat(offersFromCat) {
+
+    resetInterface();
+    var markers = new L.layerGroup();
+    for (var i = 0; i < offersFromCat; i++) {
+        var data = offersFromCat.rows;
+        console.log(data);
+        marker = new L.marker([data[i].lat, data[i].long]).bindPopup(data[i].partner_name);
+        markers.addLayer(marker);
+    }
+    mymap.addLayer(markers);
+}
+
+// for (var i = 0; i < myItems.length; i++) {
+//     var item = myItems[i];
+//     marker = new L.marker([item[1],item[2]]).bindPopup(item[0]);
+//     markers.addLayer(marker);
+// }
+// map.addLayer(markers);
+// }
+// function displaySearchByCategory(allOfferByCat) {
 //     resetInterface();
 //     for (var b = 0; b < byCategory.length; b++) {
 //         $('#display').append('<a href="' + byCategory[b].partner_name + '" data-lightbox="' + byCategory[b].picture_name + '" data-title="' + byCategory[b].picture_name + '" class="images"><img src="' + byCategory[b].picture_url + '" alt="' + byCategory[b].picture_name + '" /></a>');
@@ -88,6 +95,10 @@ $('#listCat').on('click', function () {
     str = event.target.id;
     db.transaction(searchOffersByCategory, errorCB, successCB);
 });
+
+function resetInterface() {
+    $('#mapid').html("");
+}
 
 /***************EVENTS WITH DISCOUNT */
 
@@ -147,16 +158,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 // }
 
 
-// ************customize icon for markers of categories************** //
-// //var myItems = [
-//     ["Notre Dame de Paris", 48.853056, 2.349722],
-//     ["Musée d'Orsay", 48.86, 2.327],
-//     ["Muséum National d'Histoire Naturelle", 48.8422, 2.3564]
-// ];
-// for (var i = 0; i < myItems.length; i++) {
-//     var item = myItems[i];
-//     marker = new L.marker([item[1],item[2]]).bindPopup(item[0]).addTo(map);
-// // }
+
 // var markers/nom cate/ = new L.layerGroup();
 // for (var i = 0; i < myItems.length; i++) {
 //     var item = myItems[i];
@@ -164,9 +166,13 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 //     markers.addLayer(marker);
 // }
 // map.addLayer(markers);
-//**************************************************************** */
-
 // }
+//**************************************************************** */
+function addMarkersByCat() {
+
+    console.log(allOfferByCat);
+}
+
 
 // Marker gastro&alim
 // var allGastroOffers;

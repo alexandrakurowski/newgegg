@@ -76,7 +76,7 @@ function fillCategories(tx) {
 function fillPartners(tx) {
     console.log("testfillPartners");
     tx.executeSql("DROP TABLE IF EXISTS partners");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS partners (partner_id unique, partner_name, partner_site, lat, long, partner_desc, partner_img, offer_types, INTEGER, fk_category INTEGER, FOREIGN KEY(fk_category) REFERENCES categories (category_id))");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS partners (partner_id unique, partner_name, partner_site, lat FLOAT, long FLOAT, partner_desc, partner_img, offer_types, INTEGER, fk_category INTEGER, FOREIGN KEY(fk_category) REFERENCES categories (category_id))");
     for (var i = 0; i < allPartners.length; i++) {
         console.log("loop into partners");
         var sql = 'INSERT INTO partners (partner_id, partner_name, partner_site,lat, long, partner_desc, partner_img, offer_types,fk_category) VALUES ('
