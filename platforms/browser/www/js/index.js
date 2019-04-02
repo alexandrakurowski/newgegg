@@ -45,10 +45,7 @@ function searchOffersByCategory(tx) {
             console.log(offersFromCat);
         }
 
-    displayMarkersByCat(offersFromCat);
-    console.log(offersFromCat);
-    offersFromCat = [];
-    });
+   
 
     tx.executeSql('SELECT * FROM categories WHERE category_id = ' + catId + ';', [], function (tx, result) {
         databyCat = result.rows;
@@ -58,51 +55,69 @@ function searchOffersByCategory(tx) {
             iconUrl.push(databyCat[i].img_url);
             console.log(iconUrl);
         }
-        displayIconByCat(iconUrl);
-        console.log(iconUrl);
-        iconUrl = [];
+       
+      displayMarkersByCat(offersFromCat);
+    console.log(offersFromCat);
+    offersFromCat = [];
 
-    });
+    displayIconByCAt(iconUrl);
+    console.log(iconUrl);
+    iconUrl = [];
+    }); 
+});
    
   
 }
+function displayIconByCAt(iconUrl) {
+    console.log(iconUrl);
+    
+ var data = iconUrl.toString(data);
+    console.log(data);
+    createNewIcon(data);
+}
+function createNewIcon(data){
+    var iconMarkers = L.icon({
+        iconUrl:'',
+        iconSize: [38, 38], // size of the icon
 
+        iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAncho
+    })
+    var iconNew = iconUrl;
+    var value = data;
+    console.log(iconNew);
+    console.log(value);
+    iconMarkers [iconNew] = value;
+    console.log(iconMarkers[iconNew]);
+
+}
+console.log(iconMarkers);
 
 
 
     function displayMarkersByCat(offersFromCat) {
         console.log(offersFromCat);
        
-        // resetInterface();
+        resetInterface();
 
 
-        // var markers = new L.layerGroup();
-        // for (var i = 0; i < offersFromCat.length; i++) {
-        //     var data = offersFromCat[i];
+        var markers = new L.layerGroup();
+        for (var i = 0; i < offersFromCat.length; i++) {
+            var data = offersFromCat;
 
-        //     console.log(data[i]);
-        //     console.log(data[i][0]);
-        //     marker = new L.marker([data[i][0], data[i][1]]).bindPopup(data[i][2]);
+            console.log(data[i]);
+            console.log(data[i][0]);
+            marker = new L.marker([data[i][0], data[i][1]]).bindPopup(data[i][2]);
 
-        //     markers.addLayer(marker);
-        // }
-        // map.addLayer(markers);
+            markers.addLayer(marker);
+        }
+        mymap.addLayer(markers);
     }
 
 
 
 
-// function createIconByCAt(iconUrl) {
-//     console.log(iconUrl);
-//     var iconMarkers = L.icon({
-//         iconUrl: iconUrl,
-//         iconSize: [38, 38], // size of the icon
-
-//         iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-
-//         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-
-//     })
 
 //     function displayMarkersByCat(offersFromCat, iconUrl) {
 //         console.log(offersFromCat);
